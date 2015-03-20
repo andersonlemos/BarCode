@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0-Application", "0-Application", "{04A26A96-A807-4113-B4FC-3C9CE59E30BB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-UI", "1-UI", "{CCBF6AFC-24F6-470F-A440-B28A96D4ED7A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Tests", "2-Tests", "{840F04FA-2C2C-4E02-92CC-F19B942A0D66}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BarCode.Application", "BarCode.Application\BarCode.Application.vbproj", "{70A94079-C9D3-4546-A73E-9BA3729661B3}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BarCode.Tests", "BarCode.Tests\BarCode.Tests.vbproj", "{9DAB808F-EBF4-408A-887D-B57B2091F072}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BarCode.UI.Scan", "BarCode.UI.Scan\BarCode.UI.Scan.vbproj", "{A4B7EBC4-6B77-433B-B08F-5856ABC23B16}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug Complete|Any CPU = Debug Complete|Any CPU
+		Debug|Any CPU = Debug|Any CPU
+		Release Complete|Any CPU = Release Complete|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70A94079-C9D3-4546-A73E-9BA3729661B3}.Debug Complete|Any CPU.ActiveCfg = Debug|Any CPU
+		{70A94079-C9D3-4546-A73E-9BA3729661B3}.Debug Complete|Any CPU.Build.0 = Debug|Any CPU
+		{70A94079-C9D3-4546-A73E-9BA3729661B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70A94079-C9D3-4546-A73E-9BA3729661B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70A94079-C9D3-4546-A73E-9BA3729661B3}.Release Complete|Any CPU.ActiveCfg = Release|Any CPU
+		{70A94079-C9D3-4546-A73E-9BA3729661B3}.Release Complete|Any CPU.Build.0 = Release|Any CPU
+		{70A94079-C9D3-4546-A73E-9BA3729661B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70A94079-C9D3-4546-A73E-9BA3729661B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DAB808F-EBF4-408A-887D-B57B2091F072}.Debug Complete|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DAB808F-EBF4-408A-887D-B57B2091F072}.Debug Complete|Any CPU.Build.0 = Debug|Any CPU
+		{9DAB808F-EBF4-408A-887D-B57B2091F072}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DAB808F-EBF4-408A-887D-B57B2091F072}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DAB808F-EBF4-408A-887D-B57B2091F072}.Release Complete|Any CPU.ActiveCfg = Release|Any CPU
+		{9DAB808F-EBF4-408A-887D-B57B2091F072}.Release Complete|Any CPU.Build.0 = Release|Any CPU
+		{9DAB808F-EBF4-408A-887D-B57B2091F072}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DAB808F-EBF4-408A-887D-B57B2091F072}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4B7EBC4-6B77-433B-B08F-5856ABC23B16}.Debug Complete|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4B7EBC4-6B77-433B-B08F-5856ABC23B16}.Debug Complete|Any CPU.Build.0 = Debug|Any CPU
+		{A4B7EBC4-6B77-433B-B08F-5856ABC23B16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4B7EBC4-6B77-433B-B08F-5856ABC23B16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4B7EBC4-6B77-433B-B08F-5856ABC23B16}.Release Complete|Any CPU.ActiveCfg = Release|Any CPU
+		{A4B7EBC4-6B77-433B-B08F-5856ABC23B16}.Release Complete|Any CPU.Build.0 = Release|Any CPU
+		{A4B7EBC4-6B77-433B-B08F-5856ABC23B16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4B7EBC4-6B77-433B-B08F-5856ABC23B16}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{70A94079-C9D3-4546-A73E-9BA3729661B3} = {04A26A96-A807-4113-B4FC-3C9CE59E30BB}
+		{A4B7EBC4-6B77-433B-B08F-5856ABC23B16} = {CCBF6AFC-24F6-470F-A440-B28A96D4ED7A}
+		{9DAB808F-EBF4-408A-887D-B57B2091F072} = {840F04FA-2C2C-4E02-92CC-F19B942A0D66}
+	EndGlobalSection
+EndGlobal
