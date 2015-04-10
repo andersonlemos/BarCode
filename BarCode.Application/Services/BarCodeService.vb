@@ -5,9 +5,9 @@ Imports BarCode.Application.Interfaces
 
 Namespace Services
 
-    Public Class BarCodeGeneratorService : Implements ICodeOperation
+    Public Class BarCodeService : Implements ICodeOperation
 
-        Public Shared ReadOnly Property QrCode() As QrCode
+        Public Shared ReadOnly Property QR_CODE() As QrCode
             Get
                 Return New QrCode
             End Get
