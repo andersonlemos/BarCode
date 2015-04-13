@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\VideoSource.vb" />
+    <Compile Include="Interfaces\IBarCodeType.vb" />
     <Compile Include="Services\BarCodeService.vb" />
     <Compile Include="Entities\QrCode.vb" />
     <Compile Include="Entities\FrameSource.vb" />
@@ -64,8 +65,6 @@
     <Compile Include="Entities\Services\QRCodeDecoder.vb" />
     <Compile Include="Entities\Services\QRCodeEncoder.vb" />
     <Compile Include="Interfaces\ICodeOperation.vb" />
-    <Compile Include="Interfaces\IDecoder.vb" />
-    <Compile Include="Interfaces\IEncoder.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

@@ -10,9 +10,11 @@ Public Class Form1
 
     Private video As BarCode.Application.Entities.VideoSource
 
-    Private code As New BarCodeService(BarCodeService.QR_CODE)
+    Private _operation As IBarCodeService
 
     Private Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
+
+        _operation = New BarCodeService(New QrCode(QrCode.Decode))
 
         video.AddCaptureStream(cboVideoSource.SelectedItem)
 
@@ -83,7 +85,7 @@ Public Class Form1
 
                 Try
 
-                    Dim result As Object = code.Decode(CurrentFrame)
+                    Dim result As Object = _operation.Execute(CurrentFrame)
 
                     If Not result Is Nothing OrElse result Is String.Empty Then
                         processoAtivo.ReportProgress(100, result)

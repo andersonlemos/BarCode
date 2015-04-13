@@ -6,17 +6,17 @@ Imports ZXing.Rendering
 
 Namespace Entities.Services
 
-    Friend Class QrCodeEncoder : Implements IEncoder
+    Friend Class QrCodeEncoder : Implements ICodeOperation
+
+        Private _writerOptions As BarcodeWriter
+        Private _encodingOptions As EncodingOptions
 
         Private ReadOnly Property QrCodeRenderer() As IBarcodeRenderer(Of Bitmap)
             Get
                 Return New BitmapRenderer()
             End Get
         End Property
-
-        Private _writerOptions As BarcodeWriter
-        Private _encodingOptions As EncodingOptions
-
+        
         Sub New()
 
             QrCodeConfiguration()
@@ -49,10 +49,8 @@ Namespace Entities.Services
 
         End Sub
 
-        Public Function Encode(ByVal information As String) As Image Implements IEncoder.Encode
-
+        Public Function Execute(information As Object) As Object Implements ICodeOperation.Execute
             Return QrCodeRenderer.Render(_writerOptions.Encode(information), Nothing, Nothing, _encodingOptions)
-
         End Function
 
     End Class

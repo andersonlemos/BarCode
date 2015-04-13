@@ -1,5 +1,5 @@
 ﻿Namespace Interfaces
-    Public Interface ICodeOperation : Inherits IEncoder, IDecoder
-
+    Public Interface ICodeOperation
+        Function Execute(information As Object) As Object
     End Interface
 End Namespace

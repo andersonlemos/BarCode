@@ -1,37 +1,35 @@
 ﻿
-Imports System.Drawing
 Imports BarCode.Application.Entities.Services
 Imports BarCode.Application.Interfaces
 
 Namespace Entities
 
-    Public Class QrCode : Implements ICodeOperation, IDisposable
+    Public Class QrCode : Implements IBarCodeType, IDisposable
 
-        Private ReadOnly Property Encoder() As IEncoder
+        Private _disposed As Boolean = False
+
+        Private ReadOnly _operation As ICodeOperation
+        
+        Public Shared ReadOnly Property Encode() As ICodeOperation
             Get
                 Return New QrCodeEncoder()
             End Get
         End Property
 
-        Private ReadOnly Property Decoder() As IDecoder
+        Public Shared ReadOnly Property Decode() As ICodeOperation
             Get
                 Return New QrCodeDecoder()
             End Get
         End Property
 
-        Public Function Encode(information As String) As Image Implements IEncoder.Encode
+        
+        Sub New(operation As ICodeOperation)
+            _operation = operation
+        End Sub
 
-            Return Encoder.Encode(information)
-
+        Public Function Execute(information As Object) As Object Implements IBarCodeType.Execute
+            Return _operation.Execute(information)
         End Function
-
-        Public Function Decode(information As Image) As String Implements IDecoder.Decode
-
-            Return Decoder.Decode(information)
-
-        End Function
-
-        Private _disposed As Boolean = False
 
         Private Shadows Sub Dispose(ByVal disposing As Boolean)
 
@@ -61,6 +59,7 @@ Namespace Entities
 
         End Sub
 
+       
     End Class
 
 End Namespace

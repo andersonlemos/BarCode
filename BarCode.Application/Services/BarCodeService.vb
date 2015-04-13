@@ -5,27 +5,46 @@ Imports BarCode.Application.Interfaces
 
 Namespace Services
 
-    Public Class BarCodeService : Implements ICodeOperation
+    Public Class BarCodeService : Implements IBarCodeService, IDisposable
 
-        Public Shared ReadOnly Property QR_CODE() As QrCode
-            Get
-                Return New QrCode
-            End Get
-        End Property
+        Private _disposed As Boolean = False
+        Private ReadOnly _barCodeType As IBarCodeType
 
-        Private ReadOnly _barCodeType As ICodeOperation
-
-        Sub New(barCodeType As ICodeOperation)
+        Sub New(barCodeType As IBarCodeType)
             _barCodeType = barCodeType
         End Sub
 
-        Public Function Encode(ByVal information As String) As Image Implements ICodeOperation.Encode
-            Return _barCodeType.Encode(information)
+        Public Function Execute(ByVal information As Object) As Object Implements IBarCodeService.Execute
+            Return _barCodeType.Execute(information)
         End Function
+        
+        Private Shadows Sub Dispose(ByVal disposing As Boolean)
 
-        Public Function Decode(ByVal information As Image) As String Implements ICodeOperation.Decode
-            Return _barCodeType.Decode(information)
-        End Function
+            If Not _disposed Then
+
+                If disposing Then
+                    MyBase.Finalize()
+                End If
+
+                _disposed = True
+
+            End If
+
+        End Sub
+
+        Public Shadows Sub Dispose() Implements IDisposable.Dispose
+
+            Dispose(True)
+            GC.SuppressFinalize(Me)
+
+        End Sub
+
+        Protected Overrides Sub Finalize()
+
+            Dispose(False)
+            MyBase.Finalize()
+
+        End Sub
 
     End Class
 
