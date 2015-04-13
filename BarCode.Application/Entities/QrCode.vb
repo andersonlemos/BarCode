@@ -22,7 +22,6 @@ Namespace Entities
             End Get
         End Property
 
-        
         Sub New(operation As ICodeOperation)
             _operation = operation
         End Sub
@@ -58,8 +57,7 @@ Namespace Entities
             MyBase.Finalize()
 
         End Sub
-
-       
+        
     End Class
 
 End Namespace

@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{70A94079-C9D3-4546-A73E-9BA3729661B3}</ProjectGuid>
+    <ProjectGuid>{528FF7FA-6B56-46F1-8EAA-C902AF34574E}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>BarCode.Application</RootNamespace>
-    <AssemblyName>BarCode.Application</AssemblyName>
+    <RootNamespace>BarCode.Video</RootNamespace>
+    <AssemblyName>BarCode.Video</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,8 +21,9 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>BarCode.Application.xml</DocumentationFile>
+    <DocumentationFile>BarCode.Video.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,8 +31,9 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>BarCode.Application.xml</DocumentationFile>
+    <DocumentationFile>BarCode.Video.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -56,15 +59,11 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\VideoSource.vb" />
-    <Compile Include="Interfaces\IBarCodeType.vb" />
-    <Compile Include="Services\BarCodeService.vb" />
-    <Compile Include="Entities\QrCode.vb" />
-    <Compile Include="Entities\FrameSource.vb" />
-    <Compile Include="Entities\Services\ImageExtensions.vb" />
-    <Compile Include="Entities\Services\QRCodeDecoder.vb" />
-    <Compile Include="Entities\Services\QRCodeEncoder.vb" />
-    <Compile Include="Interfaces\ICodeOperation.vb" />
+    <Compile Include="Infra\Devices.vb" />
+    <Compile Include="Infra\DeviceType.vb" />
+    <Compile Include="Infra\VideoSource.vb" />
+    <Compile Include="Interfaces\IDevice.vb" />
+    <Compile Include="Interfaces\IStreamSource.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -80,7 +79,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Services\IBarCodeService.vb" />
+    <Compile Include="Services\IVideoService.vb" />
+    <Compile Include="Services\VideoService.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -121,14 +121,8 @@
     <Reference Include="AForge.Video.DirectShow">
       <HintPath>..\packages\AForge.Video.DirectShow.2.2.5\lib\AForge.Video.DirectShow.dll</HintPath>
     </Reference>
-    <Reference Include="System.Drawing" />
+    <Reference Include="System" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="zxing">
-      <HintPath>..\packages\ZXing.Net.0.14.0.1\lib\net40\zxing.dll</HintPath>
-    </Reference>
-    <Reference Include="zxing.presentation">
-      <HintPath>..\packages\ZXing.Net.0.14.0.1\lib\net40\zxing.presentation.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

@@ -3,12 +3,13 @@ Imports System.ComponentModel
 
 Imports BarCode.Application.Entities
 Imports BarCode.Application.Services
+Imports BarCode.Video.Infra
 
 Public Class Form1
 
     Private worker As BackgroundWorker
 
-    Private video As BarCode.Application.Entities.VideoSource
+    Private video As BarCode.Video.Infra.VideoSource
 
     Private _operation As IBarCodeService
 
@@ -60,12 +61,14 @@ Public Class Form1
     Private Sub RunCompleted(sender As Object, e As RunWorkerCompletedEventArgs)
 
         video.Stop()
-
+        _operation.dispose()
     End Sub
 
     Private Sub PreencherCombos()
 
-        Me.cboVideoSource.DataSource = video.ListOfDevices
+        Dim devices As New Devices(DeviceType.VideoInput)
+
+        Me.cboVideoSource.DataSource = devices.Get
         Me.cboVideoSource.DisplayMember = "Name"
 
     End Sub

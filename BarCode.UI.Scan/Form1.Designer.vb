@@ -22,11 +22,9 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.lblVideoSource = New System.Windows.Forms.Label()
         Me.cboVideoSource = New System.Windows.Forms.ComboBox()
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.btnStart = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -110,7 +108,6 @@ Partial Class Form1
     End Sub
     Friend WithEvents lblVideoSource As System.Windows.Forms.Label
     Friend WithEvents cboVideoSource As System.Windows.Forms.ComboBox
-    Friend WithEvents Timer1 As System.Windows.Forms.Timer
     Friend WithEvents btnStart As System.Windows.Forms.Button
     Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
     Friend WithEvents Button1 As System.Windows.Forms.Button

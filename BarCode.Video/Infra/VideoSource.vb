@@ -1,29 +1,21 @@
-﻿Imports System.Drawing
-Imports System.Windows.Forms
-Imports AForge.Video
+﻿
 Imports AForge.Controls
+Imports AForge.Video
 Imports AForge.Video.DirectShow
 
-
-Namespace Entities
+Namespace Infra
     Public Class VideoSource
-        
+
         Private ReadOnly _frameBox As VideoSourcePlayer
         Private _captureSource As VideoCaptureDevice
         Private _filter As FilterInfo
         
-        Public ReadOnly Property ListOfDevices As IEnumerable
-            Get
-                Return New FilterInfoCollection(FilterCategory.VideoInputDevice)
-            End Get
-        End Property
-  
         Private _asyncCaptureStream As IVideoSource
 
-        Sub New(frameBox As Control)
+        Sub New(frameBox As VideoSourcePlayer)
 
             _frameBox = frameBox
-            
+
         End Sub
 
         Public Sub AddCaptureStream(sourceStream As Object)

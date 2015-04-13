@@ -1,5 +1,4 @@
-﻿Imports System.Drawing
-Imports BarCode.Application.Interfaces
+﻿Imports BarCode.Application.Interfaces
 Imports ZXing
 Imports ZXing.Common
 Imports ZXing.QrCode
