@@ -61,7 +61,7 @@
   <ItemGroup>
     <Compile Include="Infra\Devices.vb" />
     <Compile Include="Infra\DeviceType.vb" />
-    <Compile Include="Infra\VideoSource.vb" />
+    <Compile Include="Infra\VideoCapture.vb" />
     <Compile Include="Interfaces\IDevice.vb" />
     <Compile Include="Interfaces\IStreamSource.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

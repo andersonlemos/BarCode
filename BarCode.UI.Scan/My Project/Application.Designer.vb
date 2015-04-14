@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.BarCode.UI.Scan.Form1
+            Me.MainForm = Global.BarCode.UI.Scan.Scanner
         End Sub
     End Class
 End Namespace

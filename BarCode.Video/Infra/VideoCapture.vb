@@ -5,7 +5,7 @@ Imports AForge.Video.DirectShow
 Imports BarCode.Video.Interfaces
 
 Namespace Infra
-    Public Class VideoSource : Implements IStreamSource, IDisposable
+    Public Class VideoCapture : Implements IStreamSource, IDisposable
 
         Private _disposed As Boolean = False
         Private _videoSourcePlayer As VideoSourcePlayer

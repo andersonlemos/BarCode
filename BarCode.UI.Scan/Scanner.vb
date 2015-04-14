@@ -6,23 +6,29 @@ Imports BarCode.Application.Services
 Imports BarCode.Video.Infra
 Imports BarCode.Video.Services
 
-Public Class Form1
+Public Class Scanner
 
     Private _worker As BackgroundWorker
-
     Private _video As IVideoService
     Private _operation As IBarCodeService
 
     Private Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
+        If Not _worker.IsBusy Then
+            _operation = New BarCodeService(New QrCode(QrCode.Decode))
 
-        _operation = New BarCodeService(New QrCode(QrCode.Decode))
-        
-        _video = New VideoService(New VideoSource(VideoSourcePlayer1, cboVideoSource.SelectedItem))
-        
-        _video.Start()
+            _video = New VideoService(New VideoCapture(VideoSource, cboVideoSource.SelectedItem))
 
-        _worker.RunWorkerAsync()
+            _video.Start()
 
+            _worker.RunWorkerAsync()
+        End If
+    End Sub
+
+    Private Sub Scanner_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
+        If _worker.IsBusy = True Then
+            _worker.CancelAsync()
+            _video.Stop()
+        End If
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -49,7 +55,7 @@ Public Class Form1
 
         If e.ProgressPercentage = 100 Then
 
-            TextBox1.Text = e.UserState.ToString()
+            txtResult.Text = e.UserState.ToString()
             _worker.CancelAsync()
 
         End If
@@ -72,7 +78,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles bntStop.Click
 
         _worker.CancelAsync()
         _video.Stop()
@@ -106,7 +112,7 @@ Public Class Form1
     End Sub
 
     Private Function CurrentFrame() As Object
-        Return VideoSourcePlayer1.GetCurrentVideoFrame()
+        Return VideoSource.GetCurrentVideoFrame()
     End Function
 
 End Class
