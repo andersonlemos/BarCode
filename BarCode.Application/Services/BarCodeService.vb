@@ -1,6 +1,4 @@
 ﻿
-Imports System.Drawing
-Imports BarCode.Application.Entities
 Imports BarCode.Application.Interfaces
 
 Namespace Services

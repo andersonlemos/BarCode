@@ -2,8 +2,9 @@
 Imports BarCode.Video.Interfaces
 
 Namespace Infra
-    Public Class Devices : Implements IDevice
+    Public Class Devices : Implements IDevice, IDisposable
 
+        Private _disposed As Boolean = False
         Public Shared Property TypeOfDevice() As DeviceType
 
         Private ReadOnly _filterBuilder As FilterInfoCollection
@@ -15,6 +16,34 @@ Namespace Infra
         Public Function [Get]() As IEnumerable Implements IDevice.[Get]
             Return _filterBuilder
         End Function
+
+        Private Sub Dispose(ByVal disposing As Boolean)
+
+            If Not _disposed Then
+
+                If disposing Then
+                    MyBase.Finalize()
+                End If
+
+                _disposed = True
+
+            End If
+
+        End Sub
+
+        Protected Overridable Sub Dispose() Implements IDisposable.Dispose
+
+            Dispose(True)
+            GC.SuppressFinalize(Me)
+
+        End Sub
+
+        Protected Overrides Sub Finalize()
+
+            Dispose(False)
+            MyBase.Finalize()
+
+        End Sub
 
     End Class
 End Namespace

@@ -4,46 +4,44 @@ Imports System.ComponentModel
 Imports BarCode.Application.Entities
 Imports BarCode.Application.Services
 Imports BarCode.Video.Infra
+Imports BarCode.Video.Services
 
 Public Class Form1
 
-    Private worker As BackgroundWorker
+    Private _worker As BackgroundWorker
 
-    Private video As BarCode.Video.Infra.VideoSource
-
+    Private _video As IVideoService
     Private _operation As IBarCodeService
 
     Private Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
 
         _operation = New BarCodeService(New QrCode(QrCode.Decode))
+        
+        _video = New VideoService(New VideoSource(VideoSourcePlayer1, cboVideoSource.SelectedItem))
+        
+        _video.Start()
 
-        video.AddCaptureStream(cboVideoSource.SelectedItem)
-
-        video.Start()
-
-        worker.RunWorkerAsync()
+        _worker.RunWorkerAsync()
 
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles Me.Load
 
-        video = New VideoSource(Me.VideoSourcePlayer1)
-
         PreencherCombos()
 
-        worker = New BackgroundWorker()
-        worker.WorkerReportsProgress = True
-        worker.WorkerSupportsCancellation = True
+        _worker = New BackgroundWorker()
+        _worker.WorkerReportsProgress = True
+        _worker.WorkerSupportsCancellation = True
 
-        AddHandler worker.DoWork, AddressOf BackgroundWorker1_DoWork
-        AddHandler worker.ProgressChanged, AddressOf BackgroundWorker1_ProgressChanged
-        AddHandler worker.RunWorkerCompleted, AddressOf RunCompleted
+        AddHandler _worker.DoWork, AddressOf BackgroundWorker1_DoWork
+        AddHandler _worker.ProgressChanged, AddressOf BackgroundWorker1_ProgressChanged
+        AddHandler _worker.RunWorkerCompleted, AddressOf RunCompleted
 
     End Sub
 
     Private Sub BackgroundWorker1_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs)
 
-        ProcessImage(worker)
+        ProcessImage(_worker)
 
     End Sub
 
@@ -52,7 +50,7 @@ Public Class Form1
         If e.ProgressPercentage = 100 Then
 
             TextBox1.Text = e.UserState.ToString()
-            worker.CancelAsync()
+            _worker.CancelAsync()
 
         End If
 
@@ -60,23 +58,24 @@ Public Class Form1
 
     Private Sub RunCompleted(sender As Object, e As RunWorkerCompletedEventArgs)
 
-        video.Stop()
-        _operation.dispose()
+        _video.Stop()
+        _operation.Dispose()
+
     End Sub
 
     Private Sub PreencherCombos()
 
         Dim devices As New Devices(DeviceType.VideoInput)
 
-        Me.cboVideoSource.DataSource = devices.Get
-        Me.cboVideoSource.DisplayMember = "Name"
+        cboVideoSource.DataSource = devices.Get
+        cboVideoSource.DisplayMember = "Name"
 
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-        worker.CancelAsync()
-        video.Stop()
+        _worker.CancelAsync()
+        _video.Stop()
 
     End Sub
 

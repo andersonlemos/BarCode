@@ -2,41 +2,85 @@
 Imports AForge.Controls
 Imports AForge.Video
 Imports AForge.Video.DirectShow
+Imports BarCode.Video.Interfaces
 
 Namespace Infra
-    Public Class VideoSource
+    Public Class VideoSource : Implements IStreamSource, IDisposable
 
-        Private ReadOnly _frameBox As VideoSourcePlayer
+        Private _disposed As Boolean = False
+        Private _videoSourcePlayer As VideoSourcePlayer
         Private _captureSource As VideoCaptureDevice
-        Private _filter As FilterInfo
-        
         Private _asyncCaptureStream As IVideoSource
 
-        Sub New(frameBox As VideoSourcePlayer)
+        Sub New(videoSourcePlayer As VideoSourcePlayer, sourceStream As Object)
 
-            _frameBox = frameBox
-
-        End Sub
-
-        Public Sub AddCaptureStream(sourceStream As Object)
-
-            _filter = sourceStream
-            _captureSource = New VideoCaptureDevice(_filter.MonikerString)
-            _asyncCaptureStream = New AsyncVideoSource(_captureSource)
-            _frameBox.VideoSource = _asyncCaptureStream
+            ConfigStream(videoSourcePlayer, sourceStream)
 
         End Sub
 
-        Public Sub Start()
+        Private Sub ConfigStream(videoSource As VideoSourcePlayer, sourceStream As Object)
+
+            VideoSourcePlayer(videoSource)
+            CaptureSource(sourceStream.MonikerString)
+            CaptureStream(_captureSource)
+            CaptureVideo(_asyncCaptureStream)
+
+        End Sub
+
+        Private Sub CaptureSource(filter As String)
+            _captureSource = New VideoCaptureDevice(filter)
+        End Sub
+
+        Private Sub CaptureStream(captureSource As VideoCaptureDevice)
+            _asyncCaptureStream = New AsyncVideoSource(captureSource)
+        End Sub
+
+        Private Sub VideoSourcePlayer(source As VideoSourcePlayer)
+            _videoSourcePlayer = source
+        End Sub
+
+        Private Sub CaptureVideo(asyncCaptureStream As IVideoSource)
+            _videoSourcePlayer.VideoSource = asyncCaptureStream
+        End Sub
+
+        Public Sub Start() Implements IStreamSource.Start
 
             _asyncCaptureStream.Start()
 
         End Sub
 
-        Public Sub [Stop]()
+        Public Sub [Stop]() Implements IStreamSource.[Stop]
 
             _asyncCaptureStream.SignalToStop()
             _asyncCaptureStream.Stop()
+
+        End Sub
+
+        Private Sub Dispose(ByVal disposing As Boolean)
+
+            If Not _disposed Then
+
+                If disposing Then
+                    MyBase.Finalize()
+                End If
+
+                _disposed = True
+
+            End If
+
+        End Sub
+
+        Protected Overridable Sub Dispose() Implements IDisposable.Dispose
+
+            Dispose(True)
+            GC.SuppressFinalize(Me)
+
+        End Sub
+
+        Protected Overrides Sub Finalize()
+
+            Dispose(False)
+            MyBase.Finalize()
 
         End Sub
 

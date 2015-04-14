@@ -1,5 +1,6 @@
 ﻿Namespace Services
     Public Interface IVideoService
+        
 
         Sub [Start]()
         Sub [Stop]()
