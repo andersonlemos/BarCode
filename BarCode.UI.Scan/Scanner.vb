@@ -1,6 +1,5 @@
 ﻿
 Imports System.ComponentModel
-
 Imports BarCode.Application.Entities
 Imports BarCode.Application.Services
 Imports BarCode.Video.Infra
@@ -39,19 +38,19 @@ Public Class Scanner
         _worker.WorkerReportsProgress = True
         _worker.WorkerSupportsCancellation = True
 
-        AddHandler _worker.DoWork, AddressOf BackgroundWorker1_DoWork
-        AddHandler _worker.ProgressChanged, AddressOf BackgroundWorker1_ProgressChanged
+        AddHandler _worker.DoWork, AddressOf BackgroundWorker_DoWork
+        AddHandler _worker.ProgressChanged, AddressOf BackgroundWorker_ProgressChanged
         AddHandler _worker.RunWorkerCompleted, AddressOf RunCompleted
 
     End Sub
 
-    Private Sub BackgroundWorker1_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs)
+    Private Sub BackgroundWorker_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs)
 
         ProcessImage(_worker)
 
     End Sub
 
-    Private Sub BackgroundWorker1_ProgressChanged(ByVal sender As Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs)
+    Private Sub BackgroundWorker_ProgressChanged(ByVal sender As Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs)
 
         If e.ProgressPercentage = 100 Then
 
@@ -78,16 +77,16 @@ Public Class Scanner
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles bntStop.Click
+    Private Sub bntStop_Click(sender As Object, e As EventArgs) Handles bntStop.Click
 
         _worker.CancelAsync()
         _video.Stop()
 
     End Sub
 
-    Private Sub ProcessImage(processoAtivo As BackgroundWorker)
+    Private Sub ProcessImage(activeProcess As BackgroundWorker)
 
-        While processoAtivo.CancellationPending = False
+        While activeProcess.CancellationPending = False
 
             If CurrentFrame() IsNot Nothing Then
 
@@ -96,13 +95,11 @@ Public Class Scanner
                     Dim result As Object = _operation.Execute(CurrentFrame)
 
                     If Not result Is Nothing OrElse result Is String.Empty Then
-                        processoAtivo.ReportProgress(100, result)
-                    Else
-                        processoAtivo.ReportProgress(0, String.Empty)
+                        activeProcess.ReportProgress(100, result)
                     End If
 
                 Catch
-                    processoAtivo.ReportProgress(0, String.Empty)
+                    activeProcess.ReportProgress(0, String.Empty)
                 End Try
 
             End If
